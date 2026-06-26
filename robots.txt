@@ -1,0 +1,6 @@
+# robots.txt — Proyectos y Mantenimientos RD
+User-agent: *
+Allow: /
+
+# REEMPLAZAR por tu dominio real cuando publiques el sitio:
+Sitemap: https://www.proyectosymantenimientosrd.com/sitemap.xml

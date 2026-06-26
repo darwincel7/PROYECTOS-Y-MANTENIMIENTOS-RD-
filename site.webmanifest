@@ -1,0 +1,13 @@
+{
+  "name": "Proyectos y Mantenimientos RD",
+  "short_name": "Proy. Mant. RD",
+  "description": "Construcción y mantenimiento en RD: sheetrock, remodelación, plomería, electricidad, aires, cerámica y pisos.",
+  "lang": "es-DO",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0e1f3d",
+  "theme_color": "#16305c",
+  "icons": [
+    { "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
