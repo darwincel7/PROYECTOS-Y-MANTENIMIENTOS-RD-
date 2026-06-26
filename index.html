@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proyectos y Mantenimientos RD</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#16305c;--navy-dark:#0e1f3d;--blue:#2f7fc7;--blue-light:#4a9fe0;
+    --gold:#f6b51e;--teal:#16a39c;--gray:#6b7280;--light:#f4f6fa;--white:#ffffff;--text:#1f2a3d;
+    --shadow:0 20px 50px rgba(14,31,61,.12);--shadow-lg:0 30px 70px rgba(14,31,61,.18);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',sans-serif;color:var(--text);background:var(--white);overflow-x:hidden;line-height:1.6}
+  h1,h2,h3,h4{font-family:'Montserrat',sans-serif;line-height:1.15}
+  a{text-decoration:none;color:inherit}
+  img{max-width:100%;display:block}
+  .container{width:90%;max-width:1200px;margin:0 auto}
+  section{position:relative}
+  .logo-mark{width:46px;height:46px;flex-shrink:0}
+
+  /* NAVBAR */
+  nav{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:18px 0;transition:.4s;background:transparent}
+  nav.scrolled{background:rgba(255,255,255,.97);box-shadow:0 8px 30px rgba(14,31,61,.08);padding:10px 0;backdrop-filter:blur(10px)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between}
+  .brand{display:flex;align-items:center;gap:12px}
+  .brand-text{display:flex;flex-direction:column;line-height:1}
+  .brand-text .l1{font-family:'Montserrat';font-weight:900;font-size:1.05rem;color:var(--white);letter-spacing:.5px;transition:.4s}
+  .brand-text .l2{font-size:.6rem;font-weight:600;color:var(--blue-light);letter-spacing:2px;transition:.4s}
+  nav.scrolled .brand-text .l1{color:var(--navy)}
+  nav.scrolled .brand-text .l2{color:var(--blue)}
+  .nav-links{display:flex;align-items:center;gap:30px;list-style:none}
+  .nav-links a{font-weight:600;font-size:.9rem;color:rgba(255,255,255,.9);position:relative;transition:.3s}
+  nav.scrolled .nav-links a{color:var(--text)}
+  .nav-links a::after{content:'';position:absolute;bottom:-6px;left:0;width:0;height:2px;background:var(--gold);transition:.3s}
+  .nav-links a:hover::after{width:100%}
+  .nav-links a:hover{color:var(--gold)}
+  .nav-cta{background:var(--gold);color:var(--navy)!important;padding:11px 22px;border-radius:50px;font-weight:700!important;transition:.3s;box-shadow:0 8px 20px rgba(246,181,30,.35)}
+  .nav-cta:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(246,181,30,.5);color:var(--navy)!important}
+  .nav-cta::after{display:none}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;z-index:1100}
+  .hamburger span{width:26px;height:3px;background:var(--white);border-radius:3px;transition:.3s}
+  nav.scrolled .hamburger span{background:var(--navy)}
+
+  /* HERO */
+  .hero{min-height:100vh;display:flex;align-items:center;background:linear-gradient(135deg,var(--navy-dark) 0%,var(--navy) 55%,#1d3f73 100%);position:relative;overflow:hidden;padding:120px 0 60px}
+  .blueprint{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:50px 50px;opacity:.6}
+  .hero-shape{position:absolute;border-radius:50%;filter:blur(60px);opacity:.35}
+  .s1{width:400px;height:400px;background:var(--blue);top:-100px;right:-80px;animation:float 8s ease-in-out infinite}
+  .s2{width:300px;height:300px;background:var(--teal);bottom:-80px;left:-60px;animation:float 10s ease-in-out infinite reverse}
+  .s3{width:200px;height:200px;background:var(--gold);top:40%;right:20%;opacity:.2;animation:float 7s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-30px)}}
+  .hero-content{position:relative;z-index:2;max-width:720px}
+  .badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);padding:8px 18px;border-radius:50px;color:var(--gold);font-size:.8rem;font-weight:600;letter-spacing:1px;margin-bottom:24px;backdrop-filter:blur(6px)}
+  .badge .dot{width:8px;height:8px;background:var(--gold);border-radius:50%;animation:pulse 1.5s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+  .hero h1{font-size:clamp(2.4rem,5.5vw,4rem);font-weight:900;color:var(--white);margin-bottom:22px}
+  .hero h1 .hl{background:linear-gradient(120deg,var(--gold),#ffd569);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .hero p{font-size:1.18rem;color:rgba(255,255,255,.82);margin-bottom:38px;max-width:580px}
+  .hero-btns{display:flex;gap:16px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:16px 32px;border-radius:50px;font-weight:700;font-size:1rem;cursor:pointer;transition:.3s;border:none;font-family:'Inter'}
+  .btn-gold{background:var(--gold);color:var(--navy);box-shadow:0 12px 30px rgba(246,181,30,.4)}
+  .btn-gold:hover{transform:translateY(-3px);box-shadow:0 18px 40px rgba(246,181,30,.55)}
+  .btn-outline{background:rgba(255,255,255,.08);color:var(--white);border:2px solid rgba(255,255,255,.3);backdrop-filter:blur(6px)}
+  .btn-outline:hover{background:rgba(255,255,255,.16);transform:translateY(-3px);border-color:var(--white)}
+  .hero-tags{display:flex;gap:26px;margin-top:46px;flex-wrap:wrap}
+  .hero-tags span{display:flex;align-items:center;gap:8px;color:rgba(255,255,255,.7);font-size:.88rem;font-weight:500}
+  .hero-tags svg{width:18px;height:18px;color:var(--teal)}
+
+  /* SECTION HEADER */
+  .sec-head{text-align:center;max-width:640px;margin:0 auto 60px}
+  .sec-tag{display:inline-block;color:var(--blue);font-weight:700;font-size:.82rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;padding:6px 16px;background:rgba(47,127,199,.1);border-radius:50px}
+  .sec-head h2{font-size:clamp(1.9rem,4vw,2.7rem);font-weight:800;color:var(--navy);margin-bottom:16px}
+  .sec-head p{color:var(--gray);font-size:1.05rem}
+  .sec-line{width:70px;height:4px;background:linear-gradient(90deg,var(--gold),var(--blue));border-radius:4px;margin:18px auto 0}
+
+  /* SERVICIOS */
+  .servicios{padding:110px 0;background:var(--light)}
+
+  /* FEATURED SERVICE (SHEETROCK) */
+  .serv-featured{background:linear-gradient(135deg,var(--navy),#1d3f73);border-radius:28px;overflow:hidden;margin-bottom:32px;display:grid;grid-template-columns:1.05fr .95fr;box-shadow:var(--shadow-lg);position:relative}
+  .serv-featured::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:1}
+  .sf-content{padding:54px 50px;position:relative;z-index:2}
+  .sf-badge{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--navy);padding:8px 18px;border-radius:50px;font-size:.78rem;font-weight:800;letter-spacing:1px;margin-bottom:22px;box-shadow:0 8px 20px rgba(246,181,30,.4)}
+  .sf-badge svg{width:16px;height:16px}
+  .sf-content h3{color:var(--white);font-size:clamp(1.8rem,3.2vw,2.4rem);font-weight:800;margin-bottom:16px}
+  .sf-content p{color:rgba(255,255,255,.82);font-size:1.05rem;margin-bottom:26px;max-width:480px}
+  .sf-feats{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:32px}
+  .sf-feats span{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);padding:8px 14px;border-radius:50px;color:var(--white);font-size:.85rem;font-weight:500}
+  .sf-feats svg{width:15px;height:15px;color:var(--gold)}
+  .sf-img{position:relative;overflow:hidden;min-height:380px}
+
+  .serv-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:26px}
+  .serv-card{background:var(--white);border-radius:22px;padding:36px 30px;transition:.4s;position:relative;overflow:hidden;border:1px solid rgba(14,31,61,.05);box-shadow:0 10px 30px rgba(14,31,61,.05)}
+  .serv-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:5px;transition:.4s;transform:scaleX(0);transform-origin:left}
+  .serv-card:hover{transform:translateY(-10px);box-shadow:var(--shadow-lg)}
+  .serv-card:hover::before{transform:scaleX(1)}
+  .serv-card .ic{width:66px;height:66px;border-radius:18px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;transition:.4s}
+  .serv-card:hover .ic{transform:rotate(-8deg) scale(1.08)}
+  .serv-card .ic svg{width:34px;height:34px;color:var(--white)}
+  .serv-card h3{font-size:1.22rem;color:var(--navy);margin-bottom:11px;font-weight:700}
+  .serv-card p{color:var(--gray);font-size:.93rem;margin-bottom:16px}
+  .serv-card .link{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:.88rem;transition:.3s}
+  .serv-card .link svg{width:16px;height:16px;transition:.3s}
+  .serv-card:hover .link svg{transform:translateX(4px)}
+  .c-blue::before{background:var(--blue)} .c-blue .ic{background:linear-gradient(135deg,var(--blue),var(--blue-light))} .c-blue .link{color:var(--blue)}
+  .c-gold::before{background:var(--gold)} .c-gold .ic{background:linear-gradient(135deg,var(--gold),#ffce5c)} .c-gold .link{color:var(--gold)}
+  .c-gray::before{background:var(--gray)} .c-gray .ic{background:linear-gradient(135deg,#4b5563,#9ca3af)} .c-gray .link{color:var(--gray)}
+  .c-teal::before{background:var(--teal)} .c-teal .ic{background:linear-gradient(135deg,var(--teal),#3cc7bf)} .c-teal .link{color:var(--teal)}
+  .c-navy::before{background:var(--navy)} .c-navy .ic{background:linear-gradient(135deg,var(--navy),#2d5491)} .c-navy .link{color:var(--navy)}
+
+  /* ===== SHEETROCK SHOWCASE + PARALLAX ===== */
+  .sheetrock{background:var(--white)}
+  .sr-intro{padding:100px 0 60px;text-align:center;max-width:760px;margin:0 auto}
+  .sr-types{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:34px}
+  .sr-type{display:inline-flex;align-items:center;gap:9px;background:var(--light);border:1px solid rgba(14,31,61,.07);padding:12px 20px;border-radius:50px;font-weight:600;font-size:.92rem;color:var(--navy);transition:.3s}
+  .sr-type:hover{background:var(--navy);color:var(--white);transform:translateY(-3px);box-shadow:var(--shadow)}
+  .sr-type svg{width:18px;height:18px;color:var(--gold)}
+
+  /* Parallax banner */
+  .sr-banner{height:460px;position:relative;overflow:hidden;background:var(--navy-dark);display:flex;align-items:center;justify-content:center;text-align:center}
+  .sr-banner-bg{position:absolute;inset:0;z-index:0;overflow:hidden}
+  .sr-banner::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(to bottom,rgba(14,31,61,.82),rgba(22,48,92,.66))}
+  .sr-banner-content{position:relative;z-index:2;max-width:680px;padding:0 24px}
+  .sr-banner-content .tag{color:var(--gold);font-weight:700;letter-spacing:3px;font-size:.85rem;text-transform:uppercase}
+  .sr-banner-content h3{color:var(--white);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;margin:14px 0 16px}
+  .sr-banner-content p{color:rgba(255,255,255,.88);font-size:1.1rem}
+
+  /* Parallax gallery */
+  .sr-gallery-wrap{padding:90px 0;background:var(--light);overflow:hidden}
+  .sr-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:start}
+  .pcol{display:flex;flex-direction:column;gap:22px;will-change:transform;transition:transform .1s linear}
+  .pcol.mid{margin-top:50px}
+  .pframe{border-radius:18px;overflow:hidden;box-shadow:var(--shadow);position:relative;cursor:pointer}
+  .pframe .pscene{position:absolute;inset:0;transition:.6s}
+  .pframe:hover .pscene{transform:scale(1.06)}
+  .pframe .cap{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:20px 18px;background:linear-gradient(to top,rgba(14,31,61,.92),transparent);color:#fff;font-weight:700;font-size:1rem;opacity:0;transform:translateY(10px);transition:.4s}
+  .pframe:hover .cap{opacity:1;transform:translateY(0)}
+  .pbadge{position:absolute;top:14px;left:14px;z-index:2;background:rgba(246,181,30,.95);color:var(--navy);font-size:.68rem;font-weight:800;letter-spacing:.5px;padding:5px 11px;border-radius:50px}
+  .h-sm{height:240px}.h-md{height:320px}.h-lg{height:400px}
+  .sr-note{text-align:center;margin-top:46px;color:var(--gray);font-size:.92rem}
+
+  /* POR QUE / STATS */
+  .porque{padding:110px 0;background:linear-gradient(135deg,var(--navy-dark),var(--navy));position:relative;overflow:hidden}
+  .porque .blueprint{opacity:.4}
+  .porque-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;position:relative;z-index:2}
+  .porque-left .sec-tag{background:rgba(246,181,30,.15);color:var(--gold)}
+  .porque-left h2{font-size:clamp(1.9rem,4vw,2.7rem);color:var(--white);font-weight:800;margin-bottom:20px}
+  .porque-left>p{color:rgba(255,255,255,.78);font-size:1.05rem;margin-bottom:34px}
+  .feat-list{display:grid;gap:20px}
+  .feat{display:flex;gap:16px;align-items:flex-start}
+  .feat .fic{width:48px;height:48px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .feat .fic svg{width:24px;height:24px;color:var(--gold)}
+  .feat h4{color:var(--white);font-size:1.08rem;margin-bottom:4px}
+  .feat p{color:rgba(255,255,255,.65);font-size:.92rem}
+  .stats-box{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .stat{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:34px 26px;text-align:center;backdrop-filter:blur(8px);transition:.4s}
+  .stat:hover{background:rgba(255,255,255,.12);transform:translateY(-6px)}
+  .stat .num{font-family:'Montserrat';font-size:2.8rem;font-weight:900;background:linear-gradient(120deg,var(--gold),#ffd569);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
+  .stat .lbl{color:rgba(255,255,255,.75);font-size:.88rem;margin-top:10px;font-weight:500}
+
+  /* GALERIA */
+  .galeria{padding:110px 0;background:var(--white)}
+  .gal-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px}
+  .gal-item{border-radius:20px;overflow:hidden;position:relative;height:300px;cursor:pointer;box-shadow:var(--shadow)}
+  .gal-item .scn{position:absolute;inset:0;transition:.6s}
+  .gal-item:hover .scn{transform:scale(1.08)}
+  .gal-item .ov{position:absolute;inset:0;z-index:2;background:linear-gradient(to top,rgba(14,31,61,.9) 0%,rgba(14,31,61,.25) 55%,transparent 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:28px;transition:.4s}
+  .gal-item .cat{display:inline-flex;align-items:center;gap:7px;align-self:flex-start;background:var(--gold);color:var(--navy);padding:5px 14px;border-radius:50px;font-size:.72rem;font-weight:700;margin-bottom:12px;transform:translateY(10px);opacity:0;transition:.4s}
+  .gal-item:hover .cat{transform:translateY(0);opacity:1}
+  .gal-item h4{color:var(--white);font-size:1.3rem;font-weight:700}
+  .gal-item p{color:rgba(255,255,255,.85);font-size:.9rem;margin-top:4px}
+  .gal-note{text-align:center;margin-top:36px;color:var(--gray);font-size:.92rem}
+
+  /* PROCESO */
+  .proceso{padding:110px 0;background:var(--light)}
+  .proc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:24px;position:relative}
+  .proc-step{background:var(--white);border-radius:20px;padding:36px 28px;position:relative;transition:.4s;border:1px solid rgba(14,31,61,.05)}
+  .proc-step:hover{transform:translateY(-8px);box-shadow:var(--shadow)}
+  .proc-num{font-family:'Montserrat';font-size:3.4rem;font-weight:900;color:rgba(47,127,199,.12);line-height:1;margin-bottom:8px}
+  .proc-step .pic{width:54px;height:54px;background:linear-gradient(135deg,var(--blue),var(--blue-light));border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;margin-top:-30px}
+  .proc-step .pic svg{width:28px;height:28px;color:var(--white)}
+  .proc-step h4{color:var(--navy);font-size:1.18rem;margin-bottom:10px}
+  .proc-step p{color:var(--gray);font-size:.92rem}
+
+  /* TESTIMONIOS */
+  .testi{padding:110px 0;background:var(--white)}
+  .testi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:26px}
+  .testi-card{background:var(--light);border-radius:22px;padding:36px 32px;position:relative;transition:.4s;border:1px solid rgba(14,31,61,.04)}
+  .testi-card:hover{transform:translateY(-8px);box-shadow:var(--shadow);background:var(--white)}
+  .quote{font-family:Georgia,serif;font-size:4rem;color:var(--gold);line-height:.5;height:30px;opacity:.4}
+  .stars{display:flex;gap:3px;margin-bottom:16px}
+  .stars svg{width:18px;height:18px;color:var(--gold)}
+  .testi-card p{color:var(--text);font-style:italic;margin-bottom:24px;font-size:1rem}
+  .testi-author{display:flex;align-items:center;gap:14px}
+  .avatar{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,var(--navy),var(--blue));display:flex;align-items:center;justify-content:center;color:var(--white);font-weight:700;font-family:'Montserrat';font-size:1.1rem}
+  .testi-author .nm{font-weight:700;color:var(--navy);font-size:.98rem}
+  .testi-author .rl{color:var(--gray);font-size:.84rem}
+
+  /* CONTACTO */
+  .contacto{padding:110px 0;background:linear-gradient(135deg,var(--navy-dark),var(--navy));position:relative;overflow:hidden}
+  .contacto .blueprint{opacity:.4}
+  .cont-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:50px;position:relative;z-index:2}
+  .cont-left .sec-tag{background:rgba(246,181,30,.15);color:var(--gold)}
+  .cont-left h2{color:var(--white);font-size:clamp(1.9rem,4vw,2.6rem);font-weight:800;margin-bottom:18px}
+  .cont-left>p{color:rgba(255,255,255,.78);margin-bottom:36px;font-size:1.05rem}
+  .cont-info{display:grid;gap:22px}
+  .ci{display:flex;align-items:center;gap:16px}
+  .ci .cic{width:52px;height:52px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:.3s}
+  .ci:hover .cic{background:var(--gold)}
+  .ci:hover .cic svg{color:var(--navy)}
+  .ci .cic svg{width:24px;height:24px;color:var(--gold);transition:.3s}
+  .ci .ct .t1{color:rgba(255,255,255,.6);font-size:.8rem}
+  .ci .ct .t2{color:var(--white);font-weight:600;font-size:1rem}
+  .form-box{background:var(--white);border-radius:24px;padding:42px;box-shadow:var(--shadow-lg)}
+  .form-box h3{color:var(--navy);font-size:1.5rem;margin-bottom:6px}
+  .form-box .sub{color:var(--gray);font-size:.92rem;margin-bottom:28px}
+  .fg{margin-bottom:18px}
+  .fg label{display:block;font-weight:600;font-size:.85rem;color:var(--navy);margin-bottom:7px}
+  .fg input,.fg select,.fg textarea{width:100%;padding:13px 16px;border:2px solid #e5e9f0;border-radius:12px;font-family:'Inter';font-size:.95rem;transition:.3s;background:var(--light)}
+  .fg input:focus,.fg select:focus,.fg textarea:focus{outline:none;border-color:var(--blue);background:var(--white)}
+  .fg textarea{resize:vertical;min-height:100px}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .submit-btn{width:100%;background:linear-gradient(135deg,var(--gold),#ffce5c);color:var(--navy);padding:16px;border:none;border-radius:12px;font-weight:700;font-size:1.05rem;cursor:pointer;transition:.3s;display:flex;align-items:center;justify-content:center;gap:10px;font-family:'Inter';box-shadow:0 12px 28px rgba(246,181,30,.35)}
+  .submit-btn:hover{transform:translateY(-2px);box-shadow:0 18px 36px rgba(246,181,30,.5)}
+  .submit-btn svg{width:20px;height:20px}
+
+  /* FOOTER */
+  footer{background:var(--navy-dark);color:rgba(255,255,255,.7);padding:70px 0 30px}
+  .foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px;margin-bottom:50px}
+  .foot-brand{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+  .foot-brand .l1{font-family:'Montserrat';font-weight:900;color:var(--white);font-size:1.05rem;line-height:1}
+  .foot-brand .l2{font-size:.6rem;color:var(--blue-light);letter-spacing:2px}
+  .foot-col p{font-size:.92rem;margin-bottom:20px}
+  .foot-col h4{color:var(--white);font-size:1rem;margin-bottom:20px;font-family:'Montserrat'}
+  .foot-col ul{list-style:none}
+  .foot-col ul li{margin-bottom:12px}
+  .foot-col ul a{font-size:.9rem;transition:.3s;display:inline-flex;align-items:center;gap:8px}
+  .foot-col ul a:hover{color:var(--gold);transform:translateX(4px)}
+  .socials{display:flex;gap:12px}
+  .socials a{width:42px;height:42px;background:rgba(255,255,255,.08);border-radius:12px;display:flex;align-items:center;justify-content:center;transition:.3s}
+  .socials a:hover{background:var(--gold);transform:translateY(-3px)}
+  .socials a:hover svg{color:var(--navy)}
+  .socials svg{width:20px;height:20px;color:var(--white);transition:.3s}
+  .foot-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:26px;text-align:center;font-size:.85rem}
+  .foot-bottom span{color:var(--gold)}
+
+  /* WHATSAPP FLOAT */
+  .wa-float{position:fixed;bottom:26px;right:26px;width:62px;height:62px;background:#25d366;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:999;box-shadow:0 10px 30px rgba(37,211,102,.45);transition:.3s;animation:bounce 2.5s infinite}
+  .wa-float:hover{transform:scale(1.1)}
+  .wa-float svg{width:34px;height:34px;color:#fff}
+  @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+  /* REVEAL */
+  .reveal{opacity:0;transform:translateY(40px);transition:.8s cubic-bezier(.16,1,.3,1)}
+  .reveal.show{opacity:1;transform:translateY(0)}
+
+  /* RESPONSIVE */
+  @media(max-width:900px){
+    .porque-grid,.cont-grid{grid-template-columns:1fr;gap:40px}
+    .foot-grid{grid-template-columns:1fr 1fr;gap:30px}
+    .serv-featured{grid-template-columns:1fr}
+    .sf-img{min-height:240px;order:-1}
+  }
+  @media(max-width:768px){
+    .hamburger{display:flex}
+    .nav-links{position:fixed;top:0;right:-100%;width:78%;max-width:320px;height:100vh;background:var(--navy);flex-direction:column;justify-content:center;gap:26px;transition:.4s;box-shadow:-10px 0 40px rgba(0,0,0,.3)}
+    .nav-links.active{right:0}
+    .nav-links a{color:var(--white)!important;font-size:1.1rem}
+    .hamburger.active span:nth-child(1){transform:rotate(45deg) translate(6px,6px)}
+    .hamburger.active span:nth-child(2){opacity:0}
+    .hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(6px,-6px)}
+    .stats-box{grid-template-columns:1fr 1fr}
+    .form-row{grid-template-columns:1fr}
+    .form-box{padding:30px 24px}
+    .hero-tags{gap:16px}
+    .sr-cols{grid-template-columns:1fr 1fr;gap:16px}
+    .pcol{transform:none!important}.pcol.mid{margin-top:0}
+    .sr-banner{height:380px}
+    .sf-content{padding:38px 30px}
+  }
+  @media(max-width:480px){
+    .foot-grid{grid-template-columns:1fr}
+    .stats-box{grid-template-columns:1fr}
+    .hero-btns{flex-direction:column}
+    .hero-btns .btn{width:100%;justify-content:center}
+    .sr-cols{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="nav">
+  <div class="container nav-inner">
+    <a href="#inicio" class="brand">
+      <svg class="logo-mark" viewBox="0 0 100 100" fill="none">
+        <path d="M50 12 L88 44 L78 44 L78 50 L22 50 L22 44 L12 44 Z" fill="#16305c"/>
+        <rect x="40" y="20" width="12" height="14" fill="#6b7280" transform="skewX(-8)"/>
+        <rect x="14" y="52" width="17" height="32" rx="2" fill="#2f7fc7"/>
+        <rect x="33" y="52" width="17" height="32" rx="2" fill="#f6b51e"/>
+        <rect x="52" y="52" width="17" height="32" rx="2" fill="#6b7280"/>
+        <rect x="71" y="52" width="17" height="32" rx="2" fill="#16a39c"/>
+        <path d="M21 62 h3 v-3 h-1 v-2 h-3 v2 h-1 v3 h2 v6 h1z" fill="#fff"/>
+        <path d="M42 58 l-4 6 h3 l-2 6 6-8 h-3 z" fill="#fff"/>
+        <circle cx="79" cy="66" r="6" fill="none" stroke="#fff" stroke-width="1.5"/>
+        <path d="M79 60 v12 M73 66 h12 M75 62 l8 8 M83 62 l-8 8" stroke="#fff" stroke-width="1.2"/>
+        <rect x="56" y="59" width="9" height="4" rx="1" fill="#fff"/><rect x="59" y="63" width="3" height="7" fill="#fff"/>
+      </svg>
+      <div class="brand-text">
+        <span class="l1">PROYECTOS Y MANT. RD</span>
+        <span class="l2">SOLUCIONES MODERNAS</span>
+      </div>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#sheetrock">Sheetrock</a></li>
+      <li><a href="#galeria">Proyectos</a></li>
+      <li><a href="#contacto" class="nav-cta">Cotizar Ahora</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="blueprint"></div>
+  <div class="hero-shape s1"></div>
+  <div class="hero-shape s2"></div>
+  <div class="hero-shape s3"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="badge"><span class="dot"></span>EXPERTOS EN CONSTRUCCIÓN Y MANTENIMIENTO</div>
+      <h1>Transformamos tu espacio con <span class="hl">acabados premium</span></h1>
+      <p>Desde la instalación de Sheetrock y remodelación de interiores hasta plomería, electricidad y climatización. Personal capacitado y responsable, experto en cada área.</p>
+      <div class="hero-btns">
+        <a href="#contacto" class="btn btn-gold">Solicitar Cotización
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="20" height="20"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#sheetrock" class="btn btn-outline">Ver Diseños de Sheetrock</a>
+      </div>
+      <div class="hero-tags">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Garantía de calidad</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Personal certificado</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Acabados de lujo</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section class="servicios" id="servicios">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-tag">Nuestros Servicios</span>
+      <h2>Todo lo que tu hogar necesita</h2>
+      <p>Soluciones integrales de construcción y mantenimiento con la garantía de un equipo de expertos en cada especialidad.</p>
+      <div class="sec-line"></div>
+    </div>
+
+    <!-- SERVICIO DESTACADO: SHEETROCK -->
+    <div class="serv-featured reveal">
+      <div class="sf-content">
+        <span class="sf-badge">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-6 4 2 7-6-4-6 4 2-7-6-4h7z"/></svg>
+          SERVICIO MÁS SOLICITADO
+        </span>
+        <h3>Instalación y Diseño de Sheetrock</h3>
+        <p>Nuestra especialidad estrella. Transformamos techos, paredes y espacios con diseños modernos en sheetrock (drywall): plafones decorativos, nichos, cornisas y acabados perfectamente lisos.</p>
+        <div class="sf-feats">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Plafones y techos</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Paredes decorativas</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Nichos y cornisas</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Acabado liso premium</span>
+        </div>
+        <a href="#sheetrock" class="btn btn-gold">Ver diseños
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="20" height="20"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="sf-img" data-design="tray" data-pal="navy"></div>
+    </div>
+
+    <div class="serv-grid">
+      <div class="serv-card c-navy reveal">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4M9 9v.01M9 12v.01M9 15v.01M9 18v.01"/></svg></div>
+        <h3>Remodelación de Fachadas e Interiores</h3>
+        <p>Renovamos por completo la imagen de tu propiedad con diseños modernos y acabados de primera.</p>
+        <a class="link">Más información <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="serv-card c-blue reveal">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3v3M9 6c-1.5 0-3 1-3 3v2h9V9c0-2-1.5-3-3-3M10.5 11v4a1.5 1.5 0 003 0M14 8h4M16 6v4"/></svg></div>
+        <h3>Plomería</h3>
+        <p>Instalación, reparación y mantenimiento de tuberías, grifería y sistemas sanitarios. Sin filtraciones.</p>
+        <a class="link">Más información <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="serv-card c-gold reveal">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M13 2L4 14h6l-1 8 9-12h-6z"/></svg></div>
+        <h3>Electricidad Industrial</h3>
+        <p>Instalaciones eléctricas seguras y certificadas para hogares e industrias. Cumplimos toda norma.</p>
+        <a class="link">Más información <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="serv-card c-teal reveal">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v20M2 12h20M5 5l14 14M19 5L5 19M12 5l-3 3M12 5l3 3M12 19l-3-3M12 19l3-3M5 12l3-3M5 12l3 3M19 12l-3-3M19 12l-3 3"/></svg></div>
+        <h3>Aires Acondicionados</h3>
+        <p>Reparación, mantenimiento e instalación de sistemas de climatización. Tu hogar fresco todo el año.</p>
+        <a class="link">Más información <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="serv-card c-blue reveal">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
+        <h3>Cerámica y Pisos</h3>
+        <p>Colocación experta de cerámica, porcelanato y todo tipo de pisos. Precisión para un resultado impecable.</p>
+        <a class="link">Más información <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="serv-card c-gray reveal">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 4l6 6M3 21l1-5 12-12 4 4-12 12-5 1z"/></svg></div>
+        <h3>Mantenimiento General</h3>
+        <p>Reparaciones y mantenimiento integral para que tu propiedad siempre luzca y funcione como nueva.</p>
+        <a class="link">Más información <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SHEETROCK SHOWCASE + PARALLAX ===== -->
+<section class="sheetrock" id="sheetrock">
+  <div class="container">
+    <div class="sr-intro reveal">
+      <span class="sec-tag">Nuestra Especialidad</span>
+      <h2 style="font-size:clamp(1.9rem,4vw,2.7rem);color:var(--navy);font-weight:800;margin-bottom:16px">Diseños en Sheetrock que transforman</h2>
+      <p style="color:var(--gray);font-size:1.08rem">El sheetrock (drywall) nos permite crear espacios modernos, elegantes y funcionales. Desde plafones con iluminación LED hasta paredes decorativas y divisiones. Estos son algunos de los estilos que realizamos:</p>
+      <div class="sr-types">
+        <span class="sr-type"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 9v12"/></svg>Plafones y techos</span>
+        <span class="sr-type"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/></svg>Paredes decorativas</span>
+        <span class="sr-type"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z M8 8h8v8H8z"/></svg>Nichos para TV</span>
+        <span class="sr-type"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V8h14v13M5 8l7-5 7 5"/></svg>Cornisas y molduras</span>
+        <span class="sr-type"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M3 12h18"/></svg>Divisiones de ambientes</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PARALLAX BANNER -->
+  <div class="sr-banner">
+    <div class="sr-banner-bg" data-design="round" data-pal="navy"></div>
+    <div class="sr-banner-content reveal">
+      <span class="tag">Acabados de lujo</span>
+      <h3>Diseños modernos, hechos a tu medida</h3>
+      <p>Convertimos cualquier espacio en un ambiente premium con sheetrock de la más alta calidad.</p>
+    </div>
+  </div>
+
+  <!-- PARALLAX GALLERY -->
+  <div class="sr-gallery-wrap" id="sheetrock-gallery">
+    <div class="container">
+      <div class="sr-cols">
+
+        <div class="pcol" data-speed="-0.07">
+          <div class="pframe h-md"><div class="pscene" data-design="tray" data-pal="warm"></div><span class="pbadge">Plafón</span><div class="cap">Plafón con cove LED</div></div>
+          <div class="pframe h-sm"><div class="pscene" data-design="tv" data-pal="dark"></div><span class="pbadge">Pared TV</span><div class="cap">Nicho decorativo para TV</div></div>
+          <div class="pframe h-md"><div class="pscene" data-design="linear" data-pal="cool"></div><span class="pbadge">Techo</span><div class="cap">Líneas de luz lineales</div></div>
+        </div>
+
+        <div class="pcol mid" data-speed="0.07">
+          <div class="pframe h-lg"><div class="pscene" data-design="round" data-pal="navy"></div><span class="pbadge">Plafón</span><div class="cap">Plafón circular con LED</div></div>
+          <div class="pframe h-sm"><div class="pscene" data-design="coffered" data-pal="warm"></div><span class="pbadge">Techo</span><div class="cap">Techo artesonado (coffered)</div></div>
+          <div class="pframe h-md"><div class="pscene" data-design="stepped" data-pal="teal"></div><span class="pbadge">Techo</span><div class="cap">Techo escalonado</div></div>
+        </div>
+
+        <div class="pcol" data-speed="-0.05">
+          <div class="pframe h-sm"><div class="pscene" data-design="niche" data-pal="dark"></div><span class="pbadge">Pared</span><div class="cap">Nichos con luz indirecta</div></div>
+          <div class="pframe h-md"><div class="pscene" data-design="slats" data-pal="cool"></div><span class="pbadge">Pared</span><div class="cap">Pared de listones</div></div>
+          <div class="pframe h-lg"><div class="pscene" data-design="panels" data-pal="navy"></div><span class="pbadge">Pared</span><div class="cap">Paneles geométricos 3D</div></div>
+        </div>
+
+      </div>
+      <p class="sr-note">💡 Estos son diseños ilustrativos de los estilos que realizamos. ¡Cuando tengas fotos de tus proyectos, las colocamos aquí!</p>
+    </div>
+  </div>
+</section>
+
+<!-- POR QUE ELEGIRNOS -->
+<section class="porque" id="porque">
+  <div class="blueprint"></div>
+  <div class="container">
+    <div class="porque-grid">
+      <div class="porque-left reveal">
+        <span class="sec-tag">¿Por qué elegirnos?</span>
+        <h2>Calidad que se nota, confianza que perdura</h2>
+        <p>En Proyectos y Mantenimientos RD combinamos experiencia, responsabilidad y materiales de primera para darle a tu espacio el toque premium que merece.</p>
+        <div class="feat-list">
+          <div class="feat">
+            <div class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+            <div><h4>Personal capacitado y responsable</h4><p>Equipo de expertos certificados en cada área de trabajo.</p></div>
+          </div>
+          <div class="feat">
+            <div class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7.4-6.3-4.6L5.7 21.4 8 14 2 9.4h7.6z"/></svg></div>
+            <div><h4>Acabados premium</h4><p>Detalles cuidados y materiales de la más alta calidad.</p></div>
+          </div>
+          <div class="feat">
+            <div class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg></div>
+            <div><h4>Garantía de calidad</h4><p>Respaldamos cada proyecto con garantía y compromiso.</p></div>
+          </div>
+          <div class="feat">
+            <div class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+            <div><h4>Puntualidad y cumplimiento</h4><p>Entregamos en el tiempo acordado, sin excusas.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="stats-box reveal">
+        <div class="stat"><div class="num" data-count="10">0</div><div class="lbl">Años de experiencia</div></div>
+        <div class="stat"><div class="num" data-count="500">0</div><div class="lbl">Proyectos completados</div></div>
+        <div class="stat"><div class="num" data-count="100">0</div><div class="lbl">% Clientes satisfechos</div></div>
+        <div class="stat"><div class="num" data-count="6">0</div><div class="lbl">Áreas de especialidad</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERIA -->
+<section class="galeria" id="galeria">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-tag">Nuestros Proyectos</span>
+      <h2>Trabajos que hablan por sí solos</h2>
+      <p>Una muestra de las transformaciones que hemos logrado para nuestros clientes.</p>
+      <div class="sec-line"></div>
+    </div>
+    <div class="gal-grid">
+      <div class="gal-item reveal"><div class="scn" data-design="panels" data-pal="navy"></div><div class="ov"><span class="cat">Fachadas</span><h4>Renovación de Fachada</h4><p>Diseño moderno y elegante</p></div></div>
+      <div class="gal-item reveal"><div class="scn" data-design="coffered" data-pal="warm"></div><div class="ov"><span class="cat">Pisos</span><h4>Porcelanato de Lujo</h4><p>Instalación impecable</p></div></div>
+      <div class="gal-item reveal"><div class="scn" data-design="tray" data-pal="cool"></div><div class="ov"><span class="cat">Interiores</span><h4>Remodelación de Sala</h4><p>Espacios modernos</p></div></div>
+      <div class="gal-item reveal"><div class="scn" data-design="stepped" data-pal="navy"></div><div class="ov"><span class="cat">Sheetrock</span><h4>Techos en Drywall</h4><p>Acabados perfectos</p></div></div>
+      <div class="gal-item reveal"><div class="scn" data-design="tv" data-pal="teal"></div><div class="ov"><span class="cat">Climatización</span><h4>Sala con A/C</h4><p>Confort garantizado</p></div></div>
+      <div class="gal-item reveal"><div class="scn" data-design="niche" data-pal="warm"></div><div class="ov"><span class="cat">Cocina</span><h4>Cocina Integral</h4><p>Diseño funcional</p></div></div>
+    </div>
+    <p class="gal-note">📸 Espacio listo para mostrar las fotos reales de tus proyectos (antes y después).</p>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section class="proceso">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-tag">Cómo Trabajamos</span>
+      <h2>Un proceso simple y transparente</h2>
+      <div class="sec-line"></div>
+    </div>
+    <div class="proc-grid">
+      <div class="proc-step reveal"><div class="proc-num">01</div><div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div><h4>Consulta y Evaluación</h4><p>Visitamos tu espacio, escuchamos tus ideas y evaluamos el proyecto sin compromiso.</p></div>
+      <div class="proc-step reveal"><div class="proc-num">02</div><div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg></div><h4>Cotización y Plan</h4><p>Te presentamos un presupuesto claro y un plan de trabajo detallado.</p></div>
+      <div class="proc-step reveal"><div class="proc-num">03</div><div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div><h4>Ejecución Profesional</h4><p>Nuestro equipo de expertos ejecuta el trabajo con precisión y los mejores materiales.</p></div>
+      <div class="proc-step reveal"><div class="proc-num">04</div><div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg></div><h4>Entrega y Garantía</h4><p>Entregamos tu proyecto terminado con garantía total de satisfacción.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section class="testi">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-tag">Testimonios</span>
+      <h2>Lo que dicen nuestros clientes</h2>
+      <div class="sec-line"></div>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <div class="quote">"</div>
+        <div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-6 4 2 7-6-4-6 4 2-7-6-4h7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-6 4 2 7-6-4-6 4 2-7-6-4h7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-6 4 2 7-6-4-6 4 2-7-6-4h7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-6 4 2 7-6-4-6 4 2-7-6-4h7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-6 4 2 7-6-4-6 4 2-7-6-4h7z"/></svg></div>
+        <p>Me hicieron un plafón de sheetrock con luces LED en la sala y quedó espectacular. Personal súper responsable y puntual. ¡Totalmente recomendados!</p>
+        <div class="testi-author"><div class="avatar">MR</div><div><div class="nm">María Rodríguez</div><div class="rl">Santo Domingo</div></div></div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="quote">"</div>
+        <div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-6 4 2 7-6-4-6 4 2-7-6-4h7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-6 4 2 7-6-4-6 4 2-7-6-4h7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-6 4 2 7-6-4-6 4 2-7-6-4h7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-6 4 2 7-6-4-6 4 2-7-6-4h7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-6 4 2 7-6-4-6 4 2-7-6-4h7z"/></svg></div>
+        <p>Excelente trabajo con la instalación eléctrica y el aire acondicionado. Profesionales de verdad, todo limpio y bien hecho.</p>
+        <div class="testi-author"><div class="avatar">JP</div><div><div class="nm">Juan Pérez</div><div class="rl">Santiago</div></div></div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="quote">"</div>
+        <div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-6 4 2 7-6-4-6 4 2-7-6-4h7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-6 4 2 7-6-4-6 4 2-7-6-4h7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-6 4 2 7-6-4-6 4 2-7-6-4h7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-6 4 2 7-6-4-6 4 2-7-6-4h7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-6 4 2 7-6-4-6 4 2-7-6-4h7z"/></svg></div>
+        <p>Colocaron el porcelanato de toda mi casa y quedó perfecto. Acabados de lujo y a buen precio. Volveré a contratarlos.</p>
+        <div class="testi-author"><div class="avatar">CG</div><div><div class="nm">Carmen Gómez</div><div class="rl">La Vega</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section class="contacto" id="contacto">
+  <div class="blueprint"></div>
+  <div class="container">
+    <div class="cont-grid">
+      <div class="cont-left reveal">
+        <span class="sec-tag">Contáctanos</span>
+        <h2>Solicita tu cotización gratis</h2>
+        <p>Cuéntanos qué necesitas y te responderemos lo antes posible. ¡Démosle a tu espacio el toque premium que merece!</p>
+        <div class="cont-info">
+          <a class="ci" href="https://wa.me/18090000000" target="_blank">
+            <div class="cic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-1.5-.8-2.5-1.4-3.5-3.1-.3-.5.3-.4.7-1.3.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5 1.9.8 2.6.9 3.5.7.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4 0-.1-.3-.2-.6-.3z"/><path d="M12 2a10 10 0 00-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1012 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1112 20.2z"/></svg></div>
+            <div class="ct"><div class="t1">WhatsApp</div><div class="t2">+1 (809) 000-0000</div></div>
+          </a>
+          <a class="ci" href="tel:+18090000000">
+            <div class="cic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg></div>
+            <div class="ct"><div class="t1">Teléfono</div><div class="t2">+1 (809) 000-0000</div></div>
+          </a>
+          <a class="ci" href="mailto:contacto@proyectosrd.com">
+            <div class="cic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 6L2 7"/></svg></div>
+            <div class="ct"><div class="t1">Correo</div><div class="t2">contacto@proyectosrd.com</div></div>
+          </a>
+          <div class="ci">
+            <div class="cic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <div class="ct"><div class="t1">Ubicación</div><div class="t2">República Dominicana</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="form-box reveal">
+        <h3>Envíanos un mensaje</h3>
+        <p class="sub">Completa el formulario y te contactaremos por WhatsApp.</p>
+        <form id="contactForm">
+          <div class="form-row">
+            <div class="fg"><label>Nombre completo</label><input type="text" id="nombre" placeholder="Tu nombre" required></div>
+            <div class="fg"><label>Teléfono</label><input type="tel" id="telefono" placeholder="(809) 000-0000" required></div>
+          </div>
+          <div class="fg"><label>Servicio que necesitas</label>
+            <select id="servicio" required>
+              <option value="">Selecciona un servicio</option>
+              <option>Instalación de Sheetrock</option>
+              <option>Remodelación de fachadas e interiores</option>
+              <option>Plomería</option>
+              <option>Electricidad industrial</option>
+              <option>Aires acondicionados</option>
+              <option>Cerámica y pisos</option>
+              <option>Mantenimiento general</option>
+              <option>Otro / Varios</option>
+            </select>
+          </div>
+          <div class="fg"><label>Cuéntanos sobre tu proyecto</label><textarea id="mensaje" placeholder="Describe lo que necesitas..." required></textarea></div>
+          <button type="submit" class="submit-btn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-1.5-.8-2.5-1.4-3.5-3.1-.3-.5.3-.4.7-1.3.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5 1.9.8 2.6.9 3.5.7.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4 0-.1-.3-.2-.6-.3z"/><path d="M12 2a10 10 0 00-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1012 2z"/></svg>
+            Enviar por WhatsApp
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-col">
+        <div class="foot-brand">
+          <svg class="logo-mark" viewBox="0 0 100 100" fill="none">
+            <path d="M50 12 L88 44 L78 44 L78 50 L22 50 L22 44 L12 44 Z" fill="#2f7fc7"/>
+            <rect x="14" y="52" width="17" height="32" rx="2" fill="#2f7fc7"/>
+            <rect x="33" y="52" width="17" height="32" rx="2" fill="#f6b51e"/>
+            <rect x="52" y="52" width="17" height="32" rx="2" fill="#6b7280"/>
+            <rect x="71" y="52" width="17" height="32" rx="2" fill="#16a39c"/>
+          </svg>
+          <div><div class="l1">PROYECTOS Y MANT. RD</div><div class="l2">SOLUCIONES MODERNAS</div></div>
+        </div>
+        <p>Expertos en construcción, sheetrock, remodelación y mantenimiento. Le damos a tu espacio el toque premium que merece, con personal capacitado y responsable.</p>
+        <div class="socials">
+          <a href="#"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+          <a href="#"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4" fill="#0e1f3d"/><circle cx="17.5" cy="6.5" r="1.2" fill="#0e1f3d"/></svg></a>
+          <a href="#"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-1.5-.8-2.5-1.4-3.5-3.1-.3-.5.3-.4.7-1.3.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5 1.9.8 2.6.9 3.5.7.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4 0-.1-.3-.2-.6-.3z"/><path d="M12 2a10 10 0 00-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1012 2z"/></svg></a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>Servicios</h4>
+        <ul>
+          <li><a href="#sheetrock">Sheetrock</a></li>
+          <li><a href="#servicios">Remodelaciones</a></li>
+          <li><a href="#servicios">Plomería</a></li>
+          <li><a href="#servicios">Electricidad</a></li>
+          <li><a href="#servicios">Aires Acondicionados</a></li>
+          <li><a href="#servicios">Cerámica y Pisos</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Empresa</h4>
+        <ul>
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#porque">Nosotros</a></li>
+          <li><a href="#galeria">Proyectos</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Contacto</h4>
+        <ul>
+          <li><a href="tel:+18090000000">+1 (809) 000-0000</a></li>
+          <li><a href="mailto:contacto@proyectosrd.com">contacto@proyectosrd.com</a></li>
+          <li><a href="#">República Dominicana</a></li>
+          <li><a href="#">Lun - Sáb: 8am - 6pm</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      © 2026 <span>Proyectos y Mantenimientos RD</span>. Todos los derechos reservados. · Soluciones para espacios modernos.
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/18090000000?text=Hola,%20me%20interesa%20solicitar%20una%20cotización" target="_blank" class="wa-float" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-1.5-.8-2.5-1.4-3.5-3.1-.3-.5.3-.4.7-1.3.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5 1.9.8 2.6.9 3.5.7.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4 0-.1-.3-.2-.6-.3z"/><path d="M12 2a10 10 0 00-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1012 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1112 20.2z"/></svg>
+</a>
+
+<script>
+  // ===== GENERADOR DE ILUSTRACIONES DE DISEÑOS (SVG) =====
+  const SR_PAL = {
+    dark:{a:'#3a4a68',b:'#1b2536',fl:'#141b29',st:'#e8eefc',gl:'#cfe0ff'},
+    navy:{a:'#284a7e',b:'#11233f',fl:'#0d1c31',st:'#dde9ff',gl:'#a9c8ff'},
+    teal:{a:'#1f6360',b:'#0e3a38',fl:'#0a2b29',st:'#e3fffb',gl:'#a6fff1'},
+    warm:{a:'#efe8db',b:'#d6c8b0',fl:'#bda588',st:'#6b5942',gl:'#ffdd95'},
+    cool:{a:'#e4ebf3',b:'#c3d2e0',fl:'#9fb0c1',st:'#33485f',gl:'#bcd8ff'}
+  };
+  function srSofa(o){return `<rect x="150" y="406" width="180" height="54" rx="12" fill="#000" fill-opacity="${o}"/><rect x="150" y="394" width="180" height="28" rx="10" fill="#000" fill-opacity="${o+0.05}"/><rect x="138" y="402" width="24" height="58" rx="8" fill="#000" fill-opacity="${o+0.05}"/><rect x="318" y="402" width="24" height="58" rx="8" fill="#000" fill-opacity="${o+0.05}"/>`;}
+  function makeScene(design,palName,i){
+    const p=SR_PAL[palName]||SR_PAL.navy, id='s'+i, st=p.st, gl=p.gl, o=0.16;
+    const defs=`<linearGradient id="${id}w" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${p.a}"/><stop offset="1" stop-color="${p.b}"/></linearGradient><radialGradient id="${id}g" cx="0.5" cy="0.3" r="0.75"><stop offset="0" stop-color="${gl}" stop-opacity="0.42"/><stop offset="1" stop-color="${gl}" stop-opacity="0"/></radialGradient>`;
+    const base=`<rect width="480" height="600" fill="url(#${id}w)"/><rect width="480" height="600" fill="url(#${id}g)"/><rect y="470" width="480" height="130" fill="${p.fl}"/><rect y="468" width="480" height="3" fill="${st}" opacity="0.12"/>`;
+    let d='';
+    switch(design){
+      case 'tray':
+        d=`<rect x="70" y="22" width="340" height="118" rx="10" fill="#fff" fill-opacity="0.04" stroke="${st}" stroke-opacity="0.35" stroke-width="2"/><rect x="106" y="42" width="268" height="78" rx="8" fill="#fff" fill-opacity="0.06" stroke="${st}" stroke-opacity="0.55" stroke-width="2"/><rect x="120" y="54" width="240" height="54" rx="6" fill="none" stroke="${gl}" stroke-width="3" stroke-opacity="0.85"/><line x1="240" y1="81" x2="240" y2="150" stroke="${st}" stroke-opacity="0.4" stroke-width="1.5"/><circle cx="240" cy="156" r="5" fill="${gl}"/>`+srSofa(o);break;
+      case 'coffered':{let g='';for(let r=0;r<2;r++)for(let c=0;c<4;c++){const x=58+c*95,y=22+r*66;g+=`<rect x="${x}" y="${y}" width="78" height="54" rx="5" fill="#fff" fill-opacity="0.03" stroke="${st}" stroke-opacity="0.4" stroke-width="2"/><rect x="${x+9}" y="${y+8}" width="60" height="38" rx="3" fill="#000" fill-opacity="0.1" stroke="${st}" stroke-opacity="0.2" stroke-width="1.5"/>`;}d=g+srSofa(o);break;}
+      case 'round':{let sp='';for(let a=0;a<8;a++){const ang=a*Math.PI/4,x1=240+Math.cos(ang)*72,y1=84+Math.sin(ang)*26,x2=240+Math.cos(ang)*108,y2=84+Math.sin(ang)*40;sp+=`<line x1="${x1.toFixed(0)}" y1="${y1.toFixed(0)}" x2="${x2.toFixed(0)}" y2="${y2.toFixed(0)}" stroke="${st}" stroke-opacity="0.3" stroke-width="1.5"/>`;}d=`<ellipse cx="240" cy="84" rx="160" ry="58" fill="#fff" fill-opacity="0.03" stroke="${st}" stroke-opacity="0.3" stroke-width="2"/><ellipse cx="240" cy="84" rx="110" ry="40" fill="#fff" fill-opacity="0.05" stroke="${st}" stroke-opacity="0.5" stroke-width="2"/>${sp}<ellipse cx="240" cy="84" rx="72" ry="26" fill="none" stroke="${gl}" stroke-width="3" stroke-opacity="0.85"/><circle cx="240" cy="84" r="9" fill="${gl}"/>`+srSofa(o);break;}
+      case 'stepped':
+        d=`<rect x="60" y="20" width="360" height="130" rx="6" fill="#fff" fill-opacity="0.03" stroke="${st}" stroke-opacity="0.3" stroke-width="2"/><rect x="60" y="20" width="300" height="104" rx="6" fill="#fff" fill-opacity="0.05" stroke="${st}" stroke-opacity="0.4" stroke-width="2"/><rect x="60" y="20" width="240" height="78" rx="6" fill="#fff" fill-opacity="0.07" stroke="${st}" stroke-opacity="0.5" stroke-width="2"/><line x1="64" y1="100" x2="296" y2="100" stroke="${gl}" stroke-width="3" stroke-opacity="0.85"/><line x1="300" y1="24" x2="300" y2="94" stroke="${gl}" stroke-width="3" stroke-opacity="0.7"/>`+srSofa(o);break;
+      case 'linear':{let l='';for(let k=0;k<5;k++){const y=30+k*24,on=(k===1||k===3);l+=`<rect x="70" y="${y}" width="340" height="9" rx="4.5" fill="${on?gl:'#fff'}" fill-opacity="${on?'0.8':'0.05'}" stroke="${st}" stroke-opacity="${on?'0':'0.4'}" stroke-width="1.5"/>`;}d=l+srSofa(o);break;}
+      case 'tv':{let ls='';for(let k=0;k<6;k++){ls+=`<line x1="${64+k*10}" y1="186" x2="${64+k*10}" y2="330" stroke="${st}" stroke-opacity="0.28" stroke-width="2"/><line x1="${360+k*10}" y1="186" x2="${360+k*10}" y2="330" stroke="${st}" stroke-opacity="0.28" stroke-width="2"/>`;}d=`<rect x="146" y="176" width="188" height="156" rx="12" fill="${gl}" fill-opacity="0.12"/><rect x="150" y="180" width="180" height="148" rx="10" fill="#000" fill-opacity="0.2" stroke="${st}" stroke-opacity="0.4" stroke-width="2"/><rect x="168" y="196" width="144" height="100" rx="4" fill="#0a0f1a" stroke="${st}" stroke-opacity="0.25" stroke-width="1.5"/>${ls}<rect x="150" y="338" width="180" height="20" rx="4" fill="#000" fill-opacity="0.22" stroke="${st}" stroke-opacity="0.3" stroke-width="1.5"/>`;break;}
+      case 'niche':{const n=(x)=>`<rect x="${x}" y="180" width="92" height="172" rx="8" fill="#000" fill-opacity="0.16" stroke="${st}" stroke-opacity="0.4" stroke-width="2"/><rect x="${x+6}" y="186" width="80" height="22" rx="4" fill="${gl}" fill-opacity="0.5"/><line x1="${x+6}" y1="240" x2="${x+86}" y2="240" stroke="${st}" stroke-opacity="0.35" stroke-width="2"/><line x1="${x+6}" y1="290" x2="${x+86}" y2="290" stroke="${st}" stroke-opacity="0.35" stroke-width="2"/>`;d=n(128)+n(258);break;}
+      case 'slats':{let l='';for(let k=0;k<22;k++){const x=78+k*14;l+=`<line x1="${x}" y1="178" x2="${x}" y2="424" stroke="${st}" stroke-opacity="${k%2?0.45:0.22}" stroke-width="3"/>`;}d=`<rect x="70" y="174" width="340" height="252" rx="6" fill="#fff" fill-opacity="0.02" stroke="${st}" stroke-opacity="0.3" stroke-width="2"/>${l}`;break;}
+      case 'panels':{let g='';for(let r=0;r<3;r++)for(let c=0;c<3;c++){const x=96+c*100,y=180+r*84,raised=((r+c)%2===0);g+=`<rect x="${x+5}" y="${y+5}" width="86" height="70" rx="4" fill="#000" fill-opacity="0.18"/><rect x="${x}" y="${y}" width="86" height="70" rx="4" fill="#fff" fill-opacity="${raised?0.08:0.03}" stroke="${st}" stroke-opacity="0.45" stroke-width="2"/>`;}d=g;break;}
+      default:d=srSofa(o);
+    }
+    return `<svg viewBox="0 0 480 600" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%;display:block" xmlns="http://www.w3.org/2000/svg"><defs>${defs}</defs>${base}${d}</svg>`;
+  }
+  document.querySelectorAll('[data-design]').forEach((el,i)=>{ el.innerHTML = makeScene(el.dataset.design, el.dataset.pal||'navy', i); });
+
+  // Navbar scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50));
+
+  // Mobile menu
+  const burger = document.getElementById('hamburger');
+  const links = document.getElementById('navLinks');
+  burger.addEventListener('click', () => { burger.classList.toggle('active'); links.classList.toggle('active'); });
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { burger.classList.remove('active'); links.classList.remove('active'); }));
+
+  // Reveal on scroll
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // Counter animation
+  const counters = document.querySelectorAll('[data-count]');
+  const cObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const el = e.target, target = +el.dataset.count;
+        let cur = 0; const step = target / 50;
+        const t = setInterval(() => {
+          cur += step;
+          if (cur >= target) { el.textContent = target + (target === 100 ? '%' : '+'); clearInterval(t); }
+          else el.textContent = Math.floor(cur) + (target === 100 ? '%' : '+');
+        }, 30);
+        cObs.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(c => cObs.observe(c));
+
+  // ===== PARALLAX (galería de sheetrock) =====
+  const srGallery = document.getElementById('sheetrock-gallery');
+  const pcols = document.querySelectorAll('.pcol');
+  let ticking = false;
+  function doParallax() {
+    if (window.innerWidth <= 768) { pcols.forEach(c => c.style.transform = ''); ticking = false; return; }
+    const r = srGallery.getBoundingClientRect();
+    const center = (window.innerHeight / 2) - (r.top + r.height / 2);
+    pcols.forEach(c => {
+      const sp = parseFloat(c.dataset.speed) || 0;
+      c.style.transform = `translateY(${(center * sp).toFixed(1)}px)`;
+    });
+    ticking = false;
+  }
+  window.addEventListener('scroll', () => { if (!ticking) { requestAnimationFrame(doParallax); ticking = true; } });
+  window.addEventListener('resize', doParallax);
+  doParallax();
+
+  // Contact form -> WhatsApp
+  // 👉 IMPORTANTE: Reemplaza "18090000000" por tu número real de WhatsApp
+  //    (con código de país, sin el signo + ni espacios). Ej: 18091234567
+  const MI_WHATSAPP = '18090000000';
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const nombre = document.getElementById('nombre').value;
+    const tel = document.getElementById('telefono').value;
+    const serv = document.getElementById('servicio').value;
+    const msg = document.getElementById('mensaje').value;
+    const texto = `Hola, soy ${nombre}.\n\nEstoy interesado en: ${serv}\n\n${msg}\n\nMi teléfono: ${tel}`;
+    window.open(`https://wa.me/${MI_WHATSAPP}?text=${encodeURIComponent(texto)}`, '_blank');
+  });
+</script>
+</body>
+</html>
