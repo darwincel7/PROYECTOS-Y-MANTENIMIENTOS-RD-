@@ -249,7 +249,7 @@
 
   /* Parallax banner */
   .sr-banner{height:460px;position:relative;overflow:hidden;background:var(--navy-dark);display:flex;align-items:center;justify-content:center;text-align:center}
-  .sr-banner-bg{position:absolute;inset:0;z-index:0;overflow:hidden}
+  .sr-banner-bg{position:absolute;inset:-14% 0;z-index:0;overflow:hidden;will-change:transform}
   .sr-banner::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(to bottom,rgba(14,31,61,.82),rgba(22,48,92,.66))}
   .sr-banner-content{position:relative;z-index:2;max-width:680px;padding:0 24px}
   .sr-banner-content .tag{color:var(--gold);font-weight:700;letter-spacing:3px;font-size:.85rem;text-transform:uppercase}
@@ -268,7 +268,13 @@
   .pframe:hover .cap{opacity:1;transform:translateY(0)}
   .pbadge{position:absolute;top:14px;left:14px;z-index:2;background:rgba(246,181,30,.95);color:var(--navy);font-size:.68rem;font-weight:800;letter-spacing:.5px;padding:5px 11px;border-radius:50px}
   .h-sm{height:240px}.h-md{height:320px}.h-lg{height:400px}
-  .sr-note{text-align:center;margin-top:46px;color:var(--gray);font-size:.92rem}
+  .sr-note{text-align:center;margin-top:34px;color:var(--gray);font-size:.92rem}
+  /* Foto real superpuesta sobre la ilustración: aparece con fundido al cargar.
+     Mientras carga (o si falla) se ve la ilustración de respaldo. */
+  .real-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;border:0;opacity:0;transition:opacity .6s ease}
+  /* CTA al final del showcase de sheetrock */
+  .sr-cta{text-align:center;margin-top:14px}
+  .sr-cta .btn{margin-top:6px}
 
   /* POR QUE / STATS */
   .porque{padding:110px 0;background:linear-gradient(135deg,var(--navy-dark),var(--navy));position:relative;overflow:hidden}
@@ -554,7 +560,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="20" height="20" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
       </div>
-      <div class="sf-img" data-design="tray" data-pal="navy" role="img" aria-label="Ilustración de un plafón de sheetrock con luz LED"></div>
+      <div class="sf-img" data-design="tray" data-pal="navy" data-photo="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=70" role="img" aria-label="Plafón de sheetrock con luz LED en una sala moderna"></div>
     </div>
 
     <div class="serv-grid">
@@ -602,7 +608,7 @@
 <section class="sheetrock" id="sheetrock">
   <div class="container">
     <div class="sr-intro reveal">
-      <span class="sec-tag">Nuestra Especialidad</span>
+      <span class="sec-tag">⭐ Servicio #1 · Nuestra Especialidad</span>
       <h2>Diseños en Sheetrock que transforman</h2>
       <p style="color:var(--gray);font-size:1.08rem;margin-top:16px">El sheetrock (drywall) nos permite crear espacios modernos, elegantes y funcionales. Desde plafones con iluminación LED hasta paredes decorativas y divisiones. Estos son algunos de los estilos que realizamos:</p>
       <div class="sr-types">
@@ -617,7 +623,7 @@
 
   <!-- PARALLAX BANNER -->
   <div class="sr-banner">
-    <div class="sr-banner-bg" data-design="round" data-pal="navy" aria-hidden="true"></div>
+    <div class="sr-banner-bg" data-design="round" data-pal="navy" data-photo="https://images.unsplash.com/photo-1604709177225-055f99402ea3?auto=format&fit=crop&w=1600&q=70" aria-hidden="true"></div>
     <div class="sr-banner-content reveal">
       <span class="tag">Acabados de lujo</span>
       <h3>Diseños modernos, hechos a tu medida</h3>
@@ -630,26 +636,35 @@
     <div class="container">
       <div class="sr-cols">
 
-        <div class="pcol" data-speed="-0.07">
-          <div class="pframe h-md"><div class="pscene" data-design="tray" data-pal="warm" role="img" aria-label="Plafón con cove LED"></div><span class="pbadge">Plafón</span><div class="cap">Plafón con cove LED</div></div>
-          <div class="pframe h-sm"><div class="pscene" data-design="tv" data-pal="dark" role="img" aria-label="Nicho decorativo para TV"></div><span class="pbadge">Pared TV</span><div class="cap">Nicho decorativo para TV</div></div>
-          <div class="pframe h-md"><div class="pscene" data-design="linear" data-pal="cool" role="img" aria-label="Líneas de luz lineales en el techo"></div><span class="pbadge">Techo</span><div class="cap">Líneas de luz lineales</div></div>
+        <!-- 👉 PARA PONER TUS FOTOS: cambia el enlace de cada data-photo="..." por el de tu foto.
+             (Puede ser una URL https://... o una ruta local como img/sheetrock/mi-foto.jpg)
+             Si borras el data-photo, se muestra la ilustración de respaldo. -->
+        <div class="pcol" data-speed="-0.12">
+          <div class="pframe h-md"><div class="pscene" data-design="tray" data-pal="warm" data-photo="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=800&q=70" role="img" aria-label="Plafón con cove LED"></div><span class="pbadge">Plafón</span><div class="cap">Plafón con cove LED</div></div>
+          <div class="pframe h-sm"><div class="pscene" data-design="tv" data-pal="dark" data-photo="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=800&q=70" role="img" aria-label="Nicho decorativo para TV"></div><span class="pbadge">Pared TV</span><div class="cap">Nicho decorativo para TV</div></div>
+          <div class="pframe h-md"><div class="pscene" data-design="linear" data-pal="cool" data-photo="https://images.unsplash.com/photo-1567767292278-a4f21aa2d36e?auto=format&fit=crop&w=800&q=70" role="img" aria-label="Líneas de luz lineales en el techo"></div><span class="pbadge">Techo</span><div class="cap">Líneas de luz lineales</div></div>
         </div>
 
-        <div class="pcol mid" data-speed="0.07">
-          <div class="pframe h-lg"><div class="pscene" data-design="round" data-pal="navy" role="img" aria-label="Plafón circular con LED"></div><span class="pbadge">Plafón</span><div class="cap">Plafón circular con LED</div></div>
-          <div class="pframe h-sm"><div class="pscene" data-design="coffered" data-pal="warm" role="img" aria-label="Techo artesonado"></div><span class="pbadge">Techo</span><div class="cap">Techo artesonado (coffered)</div></div>
-          <div class="pframe h-md"><div class="pscene" data-design="stepped" data-pal="teal" role="img" aria-label="Techo escalonado"></div><span class="pbadge">Techo</span><div class="cap">Techo escalonado</div></div>
+        <div class="pcol mid" data-speed="0.10">
+          <div class="pframe h-lg"><div class="pscene" data-design="round" data-pal="navy" data-photo="https://images.unsplash.com/photo-1600210492493-0946911123ea?auto=format&fit=crop&w=800&q=70" role="img" aria-label="Plafón circular con LED"></div><span class="pbadge">Plafón</span><div class="cap">Plafón circular con LED</div></div>
+          <div class="pframe h-sm"><div class="pscene" data-design="coffered" data-pal="warm" data-photo="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=70" role="img" aria-label="Techo artesonado"></div><span class="pbadge">Techo</span><div class="cap">Techo artesonado (coffered)</div></div>
+          <div class="pframe h-md"><div class="pscene" data-design="stepped" data-pal="teal" data-photo="https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?auto=format&fit=crop&w=800&q=70" role="img" aria-label="Techo escalonado"></div><span class="pbadge">Techo</span><div class="cap">Techo escalonado</div></div>
         </div>
 
-        <div class="pcol" data-speed="-0.05">
-          <div class="pframe h-sm"><div class="pscene" data-design="niche" data-pal="dark" role="img" aria-label="Nichos con luz indirecta"></div><span class="pbadge">Pared</span><div class="cap">Nichos con luz indirecta</div></div>
-          <div class="pframe h-md"><div class="pscene" data-design="slats" data-pal="cool" role="img" aria-label="Pared de listones"></div><span class="pbadge">Pared</span><div class="cap">Pared de listones</div></div>
-          <div class="pframe h-lg"><div class="pscene" data-design="panels" data-pal="navy" role="img" aria-label="Paneles geométricos 3D"></div><span class="pbadge">Pared</span><div class="cap">Paneles geométricos 3D</div></div>
+        <div class="pcol" data-speed="-0.08">
+          <div class="pframe h-sm"><div class="pscene" data-design="niche" data-pal="dark" data-photo="https://images.unsplash.com/photo-1615529182904-14819c35db37?auto=format&fit=crop&w=800&q=70" role="img" aria-label="Nichos con luz indirecta"></div><span class="pbadge">Pared</span><div class="cap">Nichos con luz indirecta</div></div>
+          <div class="pframe h-md"><div class="pscene" data-design="slats" data-pal="cool" data-photo="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=70" role="img" aria-label="Pared de listones"></div><span class="pbadge">Pared</span><div class="cap">Pared de listones</div></div>
+          <div class="pframe h-lg"><div class="pscene" data-design="panels" data-pal="navy" data-photo="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=70" role="img" aria-label="Paneles geométricos 3D"></div><span class="pbadge">Pared</span><div class="cap">Paneles geométricos 3D</div></div>
         </div>
 
       </div>
-      <p class="sr-note">💡 Estos son diseños ilustrativos de los estilos que realizamos. ¡Cuando tengas fotos de tus proyectos, las colocamos aquí!</p>
+      <div class="sr-cta reveal">
+        <p class="sr-note">📷 Fotos de referencia de los estilos que realizamos. Reemplázalas por fotos de tus propios proyectos cuando las tengas.</p>
+        <a href="#" class="btn btn-gold js-wa" data-wa-text="Hola, vi los diseños de sheetrock en su página y me interesa uno para mi casa. ¿Me pueden cotizar?">
+          Quiero un diseño así
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="20" height="20" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
     </div>
   </div>
 </section>
@@ -703,12 +718,13 @@
       <div class="sec-line" aria-hidden="true"></div>
     </div>
     <div class="gal-grid">
-      <div class="gal-item reveal"><div class="scn" data-design="panels" data-pal="navy" role="img" aria-label="Renovación de fachada"></div><div class="ov"><span class="cat">Fachadas</span><h4>Renovación de Fachada</h4><p>Diseño moderno y elegante</p></div></div>
-      <div class="gal-item reveal"><div class="scn" data-design="coffered" data-pal="warm" role="img" aria-label="Porcelanato de lujo"></div><div class="ov"><span class="cat">Pisos</span><h4>Porcelanato de Lujo</h4><p>Instalación impecable</p></div></div>
-      <div class="gal-item reveal"><div class="scn" data-design="tray" data-pal="cool" role="img" aria-label="Remodelación de sala"></div><div class="ov"><span class="cat">Interiores</span><h4>Remodelación de Sala</h4><p>Espacios modernos</p></div></div>
-      <div class="gal-item reveal"><div class="scn" data-design="stepped" data-pal="navy" role="img" aria-label="Techos en drywall"></div><div class="ov"><span class="cat">Sheetrock</span><h4>Techos en Drywall</h4><p>Acabados perfectos</p></div></div>
-      <div class="gal-item reveal"><div class="scn" data-design="tv" data-pal="teal" role="img" aria-label="Sala con aire acondicionado"></div><div class="ov"><span class="cat">Climatización</span><h4>Sala con A/C</h4><p>Confort garantizado</p></div></div>
-      <div class="gal-item reveal"><div class="scn" data-design="niche" data-pal="warm" role="img" aria-label="Cocina integral"></div><div class="ov"><span class="cat">Cocina</span><h4>Cocina Integral</h4><p>Diseño funcional</p></div></div>
+      <!-- 👉 Cambia cada data-photo="..." por la foto real de tu proyecto (URL o img/...). Sin data-photo se ve la ilustración. -->
+      <div class="gal-item reveal"><div class="scn" data-design="panels" data-pal="navy" data-photo="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=800&q=70" role="img" aria-label="Renovación de fachada"></div><div class="ov"><span class="cat">Fachadas</span><h4>Renovación de Fachada</h4><p>Diseño moderno y elegante</p></div></div>
+      <div class="gal-item reveal"><div class="scn" data-design="coffered" data-pal="warm" data-photo="https://images.unsplash.com/photo-1615873968403-89e068629265?auto=format&fit=crop&w=800&q=70" role="img" aria-label="Porcelanato de lujo"></div><div class="ov"><span class="cat">Pisos</span><h4>Porcelanato de Lujo</h4><p>Instalación impecable</p></div></div>
+      <div class="gal-item reveal"><div class="scn" data-design="tray" data-pal="cool" data-photo="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=70" role="img" aria-label="Remodelación de sala"></div><div class="ov"><span class="cat">Interiores</span><h4>Remodelación de Sala</h4><p>Espacios modernos</p></div></div>
+      <div class="gal-item reveal"><div class="scn" data-design="stepped" data-pal="navy" data-photo="https://images.unsplash.com/photo-1600210492493-0946911123ea?auto=format&fit=crop&w=800&q=70" role="img" aria-label="Techos en drywall"></div><div class="ov"><span class="cat">Sheetrock</span><h4>Techos en Drywall</h4><p>Acabados perfectos</p></div></div>
+      <div class="gal-item reveal"><div class="scn" data-design="tv" data-pal="teal" data-photo="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=800&q=70" role="img" aria-label="Sala con aire acondicionado"></div><div class="ov"><span class="cat">Climatización</span><h4>Sala con A/C</h4><p>Confort garantizado</p></div></div>
+      <div class="gal-item reveal"><div class="scn" data-design="niche" data-pal="warm" data-photo="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=70" role="img" aria-label="Cocina integral"></div><div class="ov"><span class="cat">Cocina</span><h4>Cocina Integral</h4><p>Diseño funcional</p></div></div>
     </div>
     <p class="gal-note">📸 Espacio listo para mostrar las fotos reales de tus proyectos (antes y después).</p>
   </div>
@@ -1025,6 +1041,19 @@ const CONFIG = {
   try {
     document.querySelectorAll('[data-design]').forEach(function (el, i) {
       el.innerHTML = makeScene(el.dataset.design, el.dataset.pal || 'navy', i);
+      // Si el elemento tiene una foto real, la mostramos encima de la ilustración.
+      // Si la foto no carga (URL mala o sin internet), se quita y queda la ilustración.
+      if (el.dataset.photo) {
+        var img = document.createElement('img');
+        img.className = 'real-photo';
+        img.src = el.dataset.photo;
+        img.alt = el.getAttribute('aria-label') || '';
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        img.onload = function () { img.style.opacity = 1; };   // aparece con fundido
+        img.onerror = function () { img.remove(); };           // si falla, queda la ilustración
+        el.appendChild(img);
+      }
     });
   } catch (err) { /* ignora si algo falla */ }
 
@@ -1127,22 +1156,38 @@ const CONFIG = {
     });
   });
 
-  /* ===== PARALLAX (galería de sheetrock) ===== */
+  /* ===== PARALLAX (showcase de sheetrock) ===== */
   var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var srGallery = document.getElementById('sheetrock-gallery');
   var pcols = document.querySelectorAll('.pcol');
+  var srBanner = document.querySelector('.sr-banner');
+  var srBannerBg = document.querySelector('.sr-banner-bg');
+  var vh = function () { return window.innerHeight || document.documentElement.clientHeight; };
   var ticking = false;
   function doParallax() {
-    if (!srGallery || prefersReduced || window.innerWidth <= 768) { pcols.forEach(function (c) { c.style.transform = ''; }); ticking = false; return; }
-    var r = srGallery.getBoundingClientRect();
-    var center = (window.innerHeight / 2) - (r.top + r.height / 2);
-    pcols.forEach(function (c) {
-      var sp = parseFloat(c.dataset.speed) || 0;
-      c.style.transform = 'translateY(' + (center * sp).toFixed(1) + 'px)';
-    });
     ticking = false;
+    if (prefersReduced) return;
+    // 1) Imagen del banner: se desplaza más lento que el scroll (efecto profundidad)
+    if (srBanner && srBannerBg) {
+      var br = srBanner.getBoundingClientRect();
+      if (br.bottom > 0 && br.top < vh()) {
+        var prog = (vh() - br.top) / (vh() + br.height); // 0 (entra) -> 1 (sale)
+        srBannerBg.style.transform = 'translateY(' + ((prog - 0.5) * br.height * 0.22).toFixed(1) + 'px)';
+      }
+    }
+    // 2) Columnas de la galería (solo escritorio; en móvil se apilan)
+    if (srGallery && window.innerWidth > 768) {
+      var r = srGallery.getBoundingClientRect();
+      var center = (vh() / 2) - (r.top + r.height / 2);
+      pcols.forEach(function (c) {
+        var sp = parseFloat(c.dataset.speed) || 0;
+        c.style.transform = 'translateY(' + (center * sp).toFixed(1) + 'px)';
+      });
+    } else {
+      pcols.forEach(function (c) { c.style.transform = ''; });
+    }
   }
-  if (srGallery && !prefersReduced) {
+  if (!prefersReduced && (srGallery || srBanner)) {
     window.addEventListener('scroll', function () { if (!ticking) { requestAnimationFrame(doParallax); ticking = true; } }, { passive: true });
     window.addEventListener('resize', doParallax);
     doParallax();

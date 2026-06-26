@@ -54,24 +54,39 @@ botón flotante, formulario).
 
 ---
 
-## 🖼️ Cómo poner tus fotos reales
+## 🖼️ Cómo poner TUS fotos reales (muy fácil)
 
-Ahora la galería y la sección de sheetrock muestran **ilustraciones** generadas
-por código (mientras consigues fotos). Cuando tengas fotos reales:
+La sección de **Sheetrock** y la galería de **Proyectos** ya muestran fotos de
+referencia. Para poner las tuyas, solo cambia el enlace en el atributo
+**`data-photo="..."`** de cada recuadro. Hay un comentario que te guía justo
+antes de cada galería en `index.html`.
 
-1. Crea una carpeta `img/` y guarda ahí tus fotos (de preferencia `.webp` o
-   `.jpg` optimizadas, máx. ~300 KB cada una).
-2. En la galería, reemplaza un bloque como este:
-   ```html
-   <div class="scn" data-design="panels" data-pal="navy" role="img" aria-label="..."></div>
-   ```
-   por una imagen normal:
-   ```html
-   <img class="scn" src="img/fachada.jpg" alt="Renovación de fachada en Santo Domingo"
-        loading="lazy" width="600" height="400">
-   ```
-3. Usa siempre `alt` (descripción), `loading="lazy"` y `width`/`height` para que
-   cargue rápido y se vea bien en Google.
+Ejemplo — busca una línea así y cambia lo que está entre comillas:
+```html
+<div class="pscene" data-design="tray" data-pal="warm"
+     data-photo="https://images.unsplash.com/photo-...."
+     role="img" aria-label="Plafón con cove LED"></div>
+```
+Cámbialo por tu foto:
+```html
+<div class="pscene" data-design="tray" data-pal="warm"
+     data-photo="img/sheetrock/plafon-sala.jpg"
+     role="img" aria-label="Plafón con cove LED"></div>
+```
+
+**Dos formas de usar tus fotos:**
+1. **Subiéndolas al proyecto (recomendado):** crea una carpeta `img/` y sube ahí
+   tus fotos (`.webp` o `.jpg`, optimizadas, máx. ~300 KB). Luego usa la ruta,
+   por ejemplo `data-photo="img/sheetrock/mi-foto.jpg"`.
+2. **Con un enlace:** pega la URL pública de tu foto (de Instagram/Facebook no
+   sirve directo; usa un enlace que termine en `.jpg`/`.png`/`.webp`).
+
+**Trucos:**
+- Si **borras** el `data-photo`, ese recuadro vuelve a mostrar la ilustración.
+- Si una foto no carga, se muestra automáticamente la ilustración de respaldo
+  (nunca se ve "rota").
+- El texto `aria-label` describe la foto: cámbialo para que diga lo que se ve
+  (ayuda en Google y para personas con discapacidad visual).
 
 ---
 
