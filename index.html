@@ -239,6 +239,25 @@
   .c-teal::before{background:var(--teal)} .c-teal .ic{background:linear-gradient(135deg,var(--teal),#3cc7bf)} .c-teal .link{color:var(--teal)}
   .c-navy::before{background:var(--navy)} .c-navy .ic{background:linear-gradient(135deg,var(--navy),#2d5491)} .c-navy .link{color:var(--navy)}
 
+  /* ===== SHEETROCK: BLOQUES EN ZIG-ZAG (al inicio) ===== */
+  .sr-feature{padding:100px 0 90px;background:var(--white)}
+  .sr-blocks{display:grid;gap:80px;margin-top:54px}
+  .sr-block{display:grid;grid-template-columns:1fr 1fr;gap:54px;align-items:center}
+  .sr-block.img-left .sr-pic{order:-1}
+  .sr-pic{position:relative;height:420px;border-radius:24px;overflow:hidden;box-shadow:var(--shadow-lg);background:var(--navy)}
+  .sr-pic-scene{position:absolute;inset:0}
+  .sr-pic .sr-pic-tag{position:absolute;top:18px;left:18px;z-index:3;background:rgba(246,181,30,.96);color:var(--navy);font-size:.72rem;font-weight:800;letter-spacing:.5px;padding:7px 14px;border-radius:50px;box-shadow:0 8px 20px rgba(14,31,61,.25)}
+  .sr-step{display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:14px;background:linear-gradient(135deg,var(--blue),var(--blue-light));color:#fff;font-family:'Montserrat';font-weight:800;font-size:1.1rem;margin-bottom:18px}
+  .sr-text h3{font-size:clamp(1.5rem,3vw,2rem);color:var(--navy);font-weight:800;margin-bottom:14px}
+  .sr-text>p{color:var(--gray);font-size:1.04rem;margin-bottom:20px}
+  .sr-list{list-style:none;display:grid;gap:11px;margin-bottom:26px}
+  .sr-list li{display:flex;align-items:center;gap:10px;color:var(--text);font-weight:500;font-size:.96rem}
+  .sr-list svg{width:20px;height:20px;color:var(--teal);flex-shrink:0}
+  .sr-text .link-more{display:inline-flex;align-items:center;gap:8px;font-weight:700;color:var(--blue);font-size:.95rem;transition:.3s}
+  .sr-text .link-more svg{width:18px;height:18px;transition:.3s}
+  .sr-text .link-more:hover{color:var(--gold-text)}
+  .sr-text .link-more:hover svg{transform:translateX(4px)}
+
   /* ===== SHEETROCK SHOWCASE + PARALLAX ===== */
   .sheetrock{background:var(--white)}
   .sr-intro{padding:100px 0 60px;text-align:center;max-width:760px;margin:0 auto}
@@ -415,6 +434,10 @@
   .reveal{transition:.8s cubic-bezier(.16,1,.3,1)}
   .js .reveal{opacity:0;transform:translateY(40px)}
   .reveal.show{opacity:1;transform:none}
+  /* Entradas direccionales (para los bloques en zig-zag) */
+  .js .reveal.from-left{opacity:0;transform:translateX(-70px)}
+  .js .reveal.from-right{opacity:0;transform:translateX(70px)}
+  .js .reveal.from-left.show,.js .reveal.from-right.show{opacity:1;transform:none}
 
   /* RESPONSIVE */
   @media(max-width:900px){
@@ -439,6 +462,9 @@
     .pcol{transform:none!important}.pcol.mid{margin-top:0}
     .sr-banner{height:380px}
     .sf-content{padding:38px 30px}
+    .sr-blocks{gap:54px}
+    .sr-block{grid-template-columns:1fr;gap:26px}
+    .sr-block .sr-pic{order:-1;height:280px}
     body{padding-bottom:58px}      /* espacio para la barra fija móvil */
     .mobile-bar{display:grid}
     .wa-float{bottom:74px;width:54px;height:54px}
@@ -527,6 +553,79 @@
         <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Personal certificado</span>
         <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Presupuesto sin compromiso</span>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- SHEETROCK DESTACADO: BLOQUES EN ZIG-ZAG -->
+<section class="sr-feature" id="sheetrock-destacado">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-tag">⭐ Nuestro Servicio Estrella</span>
+      <h2>Sheetrock que transforma tu espacio</h2>
+      <p>Lo más solicitado: diseños modernos en sheetrock (drywall) con acabados premium. Mira algunos de los estilos que realizamos.</p>
+      <div class="sec-line" aria-hidden="true"></div>
+    </div>
+
+    <div class="sr-blocks">
+
+      <!-- BLOQUE 1 · imagen a la DERECHA -->
+      <div class="sr-block">
+        <div class="sr-text reveal from-left">
+          <span class="sr-step">01</span>
+          <h3>Plafones y cielos en sheetrock</h3>
+          <p>Diseñamos e instalamos plafones decorativos con iluminación LED, cielos rasos y bajantes que dan altura, elegancia y un toque moderno a cualquier ambiente.</p>
+          <ul class="sr-list">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Plafones con luz LED indirecta</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Cielos rasos y bajantes</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Acabado liso, listo para pintar</li>
+          </ul>
+          <a href="#contacto" class="link-more">Solicitar este diseño <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+        <div class="sr-pic reveal from-right">
+          <div class="sr-pic-scene" data-design="tray" data-pal="navy" data-photo="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=70" role="img" aria-label="Plafón de sheetrock con iluminación LED"></div>
+          <span class="sr-pic-tag">Plafones y techos</span>
+        </div>
+      </div>
+
+      <!-- BLOQUE 2 · imagen a la IZQUIERDA -->
+      <div class="sr-block img-left">
+        <div class="sr-text reveal from-right">
+          <span class="sr-step">02</span>
+          <h3>Paredes, nichos y centros de TV</h3>
+          <p>Creamos paredes decorativas, nichos con luz indirecta y centros de entretenimiento a la medida. Ideales para darle personalidad y un look premium a tu sala.</p>
+          <ul class="sr-list">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Centros de TV y entretenimiento</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Nichos con luz indirecta</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Divisiones de ambientes</li>
+          </ul>
+          <a href="#contacto" class="link-more">Solicitar este diseño <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+        <div class="sr-pic reveal from-left">
+          <div class="sr-pic-scene" data-design="tv" data-pal="navy" data-photo="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1000&q=70" role="img" aria-label="Pared decorativa con nicho para TV en sheetrock"></div>
+          <span class="sr-pic-tag">Paredes y nichos</span>
+        </div>
+      </div>
+
+      <!-- BLOQUE 3 · imagen a la DERECHA -->
+      <div class="sr-block">
+        <div class="sr-text reveal from-left">
+          <span class="sr-step">03</span>
+          <h3>Cornisas, molduras y acabados premium</h3>
+          <p>Los detalles que marcan la diferencia: cornisas, molduras decorativas y un acabado perfectamente liso. El toque final que hace que todo se vea de lujo.</p>
+          <ul class="sr-list">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Cornisas y molduras decorativas</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Techos escalonados y artesonados</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Acabado premium impecable</li>
+          </ul>
+          <a href="#contacto" class="link-more">Solicitar este diseño <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+        <div class="sr-pic reveal from-right">
+          <div class="sr-pic-scene" data-design="round" data-pal="navy" data-photo="https://images.unsplash.com/photo-1600210492493-0946911123ea?auto=format&fit=crop&w=1000&q=70" role="img" aria-label="Techo de sheetrock con cornisas y acabado premium"></div>
+          <span class="sr-pic-tag">Cornisas y acabados</span>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
