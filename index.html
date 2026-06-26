@@ -582,8 +582,9 @@
           </ul>
           <a href="#contacto" class="link-more">Solicitar este diseño <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
         </div>
+        <!-- 👉 Para usar una FOTO real, añade  data-photo="img/tu-foto.jpg"  al div de abajo. -->
         <div class="sr-pic reveal from-right">
-          <div class="sr-pic-scene" data-design="tray" data-pal="navy" data-photo="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=70" role="img" aria-label="Plafón de sheetrock con iluminación LED"></div>
+          <div class="sr-pic-scene" data-design="swirl" data-pal="navy" role="img" aria-label="Plafón circular de sheetrock con luz LED"></div>
           <span class="sr-pic-tag">Plafones y techos</span>
         </div>
       </div>
@@ -602,7 +603,7 @@
           <a href="#contacto" class="link-more">Solicitar este diseño <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
         </div>
         <div class="sr-pic reveal from-left">
-          <div class="sr-pic-scene" data-design="tv" data-pal="navy" data-photo="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1000&q=70" role="img" aria-label="Pared decorativa con nicho para TV en sheetrock"></div>
+          <div class="sr-pic-scene" data-design="geo" data-pal="navy" role="img" aria-label="Pared y cielo de sheetrock con diseño geométrico y luz LED"></div>
           <span class="sr-pic-tag">Paredes y nichos</span>
         </div>
       </div>
@@ -621,7 +622,7 @@
           <a href="#contacto" class="link-more">Solicitar este diseño <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
         </div>
         <div class="sr-pic reveal from-right">
-          <div class="sr-pic-scene" data-design="round" data-pal="navy" data-photo="https://images.unsplash.com/photo-1600210492493-0946911123ea?auto=format&fit=crop&w=1000&q=70" role="img" aria-label="Techo de sheetrock con cornisas y acabado premium"></div>
+          <div class="sr-pic-scene" data-design="traylights" data-pal="navy" role="img" aria-label="Techo de sheetrock escalonado con downlights y cornisas"></div>
           <span class="sr-pic-tag">Cornisas y acabados</span>
         </div>
       </div>
@@ -1171,6 +1172,9 @@ const CONFIG = {
       case 'niche':{var n=function(x){return '<rect x="'+x+'" y="180" width="92" height="172" rx="8" fill="#000" fill-opacity="0.16" stroke="'+st+'" stroke-opacity="0.4" stroke-width="2"/><rect x="'+(x+6)+'" y="186" width="80" height="22" rx="4" fill="'+gl+'" fill-opacity="0.5"/><line x1="'+(x+6)+'" y1="240" x2="'+(x+86)+'" y2="240" stroke="'+st+'" stroke-opacity="0.35" stroke-width="2"/><line x1="'+(x+6)+'" y1="290" x2="'+(x+86)+'" y2="290" stroke="'+st+'" stroke-opacity="0.35" stroke-width="2"/>';};d=n(128)+n(258);break;}
       case 'slats':{var l2='';for(var k3=0;k3<22;k3++){var xx=78+k3*14;l2+='<line x1="'+xx+'" y1="178" x2="'+xx+'" y2="424" stroke="'+st+'" stroke-opacity="'+(k3%2?0.45:0.22)+'" stroke-width="3"/>';}d='<rect x="70" y="174" width="340" height="252" rx="6" fill="#fff" fill-opacity="0.02" stroke="'+st+'" stroke-opacity="0.3" stroke-width="2"/>'+l2;break;}
       case 'panels':{var g2='';for(var r2=0;r2<3;r2++)for(var c2=0;c2<3;c2++){var xp=96+c2*100,yp=180+r2*84,raised=((r2+c2)%2===0);g2+='<rect x="'+(xp+5)+'" y="'+(yp+5)+'" width="86" height="70" rx="4" fill="#000" fill-opacity="0.18"/><rect x="'+xp+'" y="'+yp+'" width="86" height="70" rx="4" fill="#fff" fill-opacity="'+(raised?0.08:0.03)+'" stroke="'+st+'" stroke-opacity="0.45" stroke-width="2"/>';}d=g2;break;}
+      case 'swirl':{var cx=240,cy=238,petal='M'+cx+' '+cy+' C '+(cx+16)+' '+(cy-62)+', '+(cx+84)+' '+(cy-72)+', '+(cx+112)+' '+(cy-32)+' C '+(cx+76)+' '+(cy-20)+', '+(cx+34)+' '+(cy+10)+', '+cx+' '+cy+' Z';var blades='';for(var a3=0;a3<5;a3++){blades+='<path d="'+petal+'" transform="rotate('+(a3*72)+' '+cx+' '+cy+')" fill="'+gl+'" fill-opacity="0.15" stroke="'+gl+'" stroke-opacity="0.78" stroke-width="2.5"/>';}var dots3='';for(var k4=0;k4<10;k4++){var an=k4*Math.PI/5;dots3+='<circle cx="'+(cx+Math.cos(an)*170).toFixed(0)+'" cy="'+(cy+Math.sin(an)*150).toFixed(0)+'" r="3.5" fill="'+gl+'" fill-opacity="0.8"/>';}d='<circle cx="'+cx+'" cy="'+cy+'" r="174" fill="'+gl+'" fill-opacity="0.06"/><circle cx="'+cx+'" cy="'+cy+'" r="132" fill="none" stroke="'+st+'" stroke-opacity="0.22" stroke-width="2"/>'+blades+'<circle cx="'+cx+'" cy="'+cy+'" r="13" fill="'+gl+'"/>'+dots3+srSofa(o);break;}
+      case 'geo':{var gsegs=[[58,46,214,150],[214,150,116,300],[214,150,300,68],[300,68,422,150],[300,300,422,156],[120,300,300,300],[58,46,120,300]];var gl2='';gsegs.forEach(function(s,idx){var on=(idx%2===0);gl2+='<line x1="'+s[0]+'" y1="'+s[1]+'" x2="'+s[2]+'" y2="'+s[3]+'" stroke="'+(on?gl:st)+'" stroke-opacity="'+(on?0.85:0.38)+'" stroke-width="'+(on?4:2)+'" stroke-linecap="round"/>';});var gd='';[[150,96],[268,150],[356,128],[182,250],[300,212]].forEach(function(pp){gd+='<circle cx="'+pp[0]+'" cy="'+pp[1]+'" r="4" fill="'+gl+'" fill-opacity="0.85"/>';});d='<circle cx="240" cy="180" r="172" fill="'+gl+'" fill-opacity="0.05"/>'+gl2+gd+srSofa(o);break;}
+      case 'traylights':{var dl='';for(var c5=0;c5<6;c5++){dl+='<circle cx="'+(132+c5*43)+'" cy="40" r="3.5" fill="'+gl+'" fill-opacity="0.85"/><circle cx="'+(132+c5*43)+'" cy="168" r="3.5" fill="'+gl+'" fill-opacity="0.85"/>';}d='<rect x="60" y="26" width="360" height="156" rx="8" fill="#fff" fill-opacity="0.03" stroke="'+st+'" stroke-opacity="0.3" stroke-width="2"/><rect x="100" y="50" width="280" height="108" rx="6" fill="#fff" fill-opacity="0.05" stroke="'+st+'" stroke-opacity="0.45" stroke-width="2"/><rect x="124" y="66" width="232" height="76" rx="4" fill="none" stroke="'+gl+'" stroke-width="3" stroke-opacity="0.85"/><rect x="150" y="84" width="180" height="40" rx="3" fill="#000" fill-opacity="0.12" stroke="'+st+'" stroke-opacity="0.25" stroke-width="1.5"/>'+dl+srSofa(o);break;}
       case 'plumbing':{var ps='stroke="'+gl+'" stroke-opacity="0.9" stroke-width="16" fill="none" stroke-linecap="round" stroke-linejoin="round"';d='<circle cx="240" cy="250" r="150" fill="'+gl+'" fill-opacity="0.07"/><path d="M150 50 V200 Q150 250 200 250 H300 V340" '+ps+'/><circle cx="150" cy="150" r="36" fill="none" stroke="'+st+'" stroke-opacity="0.55" stroke-width="9"/><path d="M150 114 V186 M114 150 H186" stroke="'+st+'" stroke-opacity="0.55" stroke-width="9" stroke-linecap="round"/><circle cx="150" cy="150" r="11" fill="'+gl+'"/><rect x="276" y="330" width="48" height="30" rx="9" fill="'+gl+'"/><circle cx="300" cy="392" r="9" fill="'+gl+'" fill-opacity="0.85"/><circle cx="300" cy="424" r="6" fill="'+gl+'" fill-opacity="0.6"/><circle cx="300" cy="450" r="4" fill="'+gl+'" fill-opacity="0.4"/>';break;}
       case 'electric':{d='<circle cx="240" cy="240" r="140" fill="'+gl+'" fill-opacity="0.10"/><path d="M272 70 L150 250 H226 L196 430 L356 220 H264 Z" fill="'+gl+'" fill-opacity="0.92" stroke="'+st+'" stroke-opacity="0.4" stroke-width="3" stroke-linejoin="round"/><circle cx="120" cy="130" r="6" fill="'+gl+'" fill-opacity="0.8"/><circle cx="372" cy="150" r="5" fill="'+gl+'" fill-opacity="0.7"/><circle cx="360" cy="370" r="7" fill="'+gl+'" fill-opacity="0.8"/><circle cx="110" cy="350" r="4" fill="'+gl+'" fill-opacity="0.6"/>';break;}
       default:d=srSofa(o);
